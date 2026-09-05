@@ -1,4 +1,3 @@
-# CCS build outputs
 Debug/
 Release/
 *.o
@@ -6,21 +5,5 @@ Release/
 *.d
 *.out
 *.map
-*.hex
-*.bin
-*.lst
-*.mk
-*.genlibs
-*.opt
-*.xdl
-
-# clangd/editor cache
-.clangd/
-**/.clangd/
 *.idx
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
+.clangd/
