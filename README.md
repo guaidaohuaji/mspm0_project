@@ -1,6 +1,6 @@
 # MSPM0G3507 工程合集
 
-该仓库用于整理多个 **TI MSPM0G3507 / Code Composer Studio** 实验工程。为了避免把多个互不相关的工程混在同一目录中，**每个工程放在独立 Git branch**；`main` 分支仅作为项目索引。
+该仓库用于整理多个 **TI MSPM0G3507 / Code Composer Studio** 实验工程。为了避免多个互不相关的工程混在同一目录中，**每个工程放在独立 Git branch**；`main` 分支仅作为项目索引。
 
 ## 工程索引
 
@@ -15,11 +15,11 @@
 | `ad9959_tuozhan_adc2` | AD9959 DDS 扩展控制 + 双 ADC/DMA 采样实验，包含频率/幅度/相位配置接口。 |
 | `apfft_nospace` | 基于 512 点数据的 APFFT（全相位 FFT）算法实验，结合 AD9959、ADC/DMA 与 UART。 |
 | `apfft_space` | APFFT 算法实验的另一版本，结合 AD9959、ADC/DMA 与定时/串口处理。 |
-| `duoji_pwm` | PWM/舵机控制实验，结合 ADC/DMA、AD9959 和 APFFT 相关代码进行综合验证。 |
+| `duoji_pwm` | PWM/舵机控制实验，结合 ADC/DMA、AD9959 和 FFT 相关代码进行综合验证。 |
 | `hardwareave` | 双 ADC/DMA 采样与硬件平均/采样链路验证工程，包含 UART 输出。 |
 | `lcd_my` | LCD 驱动、字符/中文显示和波形绘制实验工程，包含正弦波数据生成与显示。 |
 
-## 使用方式
+## 浏览方式
 
 ```bash
 git clone <repository-url>
@@ -28,10 +28,11 @@ git branch -a
 git switch THD
 ```
 
-切换到对应 branch 后，仓库根目录就是该 CCS 工程，可直接通过 Code Composer Studio 导入。
+每个 branch 对应一个原始实验工程的**求职作品集版本**，重点保留 `empty.c`、`empty.syscfg` 以及部分必要的工程/模块文件，方便查看主程序、外设配置和算法流程。
 
 ## 整理说明
 
-- 已移除 `Debug/`、`.clangd` 索引、目标文件、链接输出等编译产物。
-- 保留 `.project`、`.cproject`、`.ccsproject`、`.syscfg`、`targetConfigs/` 及源码。
-- 各 branch 的 README 根据实际源码中使用的外设和算法进行简要说明。
+- 已移除 `Debug/`、`.clangd` 索引、目标文件、链接输出等编译生成内容。
+- 不重复收录 TI SDK / CMSIS 等可由官方 SDK 提供的通用代码。
+- 个别分支为了控制作品集体积，仅展示核心源码与 SysConfig，因此不承诺 clone 后可直接编译；如需复现实验，应使用对应 `empty.syscfg` 中记录的 MSPM0 SDK / SysConfig 版本补齐依赖。
+- 分支中的功能说明依据原始源码和 SysConfig 配置整理，未修改原项目的核心实现逻辑。
