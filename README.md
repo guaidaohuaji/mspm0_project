@@ -1,12 +1,14 @@
 # LCD_module
 
-**LCD 驱动与波形显示实验**
+MSPM0G3507 LCD 驱动与波形绘制模块验证工程，包含中文/字符显示、图形与波形显示接口。
 
-基于 MSPM0G3507 验证 LCD 初始化、中文/字符显示和波形绘制，在主程序中生成测试正弦波用于显示链路验证。
+## 核心内容
 
-## 作品集保留内容
+- `empty.c`：应用主逻辑与算法/外设调用。
+- `empty.syscfg`：TI SysConfig 外设配置。
+- `LCD/`：LCD 驱动、字体/图片与绘图代码。
+- CCS 工程配置：`.project`、`.cproject`、`.ccsproject`、`targetConfigs/`。
 
-- `empty.c`：主程序与波形生成/显示调用流程
-- `empty.syscfg`：LCD GPIO 与系统时钟配置
+## 说明
 
-原始工程中的 `Debug/`、clangd 索引、目标文件和链接输出未纳入作品集分支。LCD 字库、图片资源和底层驱动体积较大，本分支重点展示主程序与硬件配置。
+该分支从原始 CCS 工程中整理，未提交 `Debug/`、clangd 缓存及编译产物。TI SDK 本体由本地 SDK/CCS 提供。
