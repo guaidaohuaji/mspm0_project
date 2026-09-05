@@ -22,7 +22,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .mspm0-payload/part-* | base64 -d > /tmp/mspm0-portfolio.tar.xz
+          {
+            head -c 7500 .mspm0-payload/part-000
+            cat .mspm0-payload/part-001 .mspm0-payload/part-002 .mspm0-payload/part-003 .mspm0-payload/part-004 .mspm0-payload/part-005 .mspm0-payload/part-006 .mspm0-payload/part-007
+          } | base64 -d > /tmp/mspm0-portfolio.tar.xz
+          echo "d7d0e335dca5b271f522a0cc154b45855b7292153739152f2b79836a798bc05c  /tmp/mspm0-portfolio.tar.xz" | sha256sum -c -
           mkdir -p /tmp/mspm0-src
           tar -xJf /tmp/mspm0-portfolio.tar.xz -C /tmp/mspm0-src
 
