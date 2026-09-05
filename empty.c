@@ -1,3 +1,4 @@
+
 #include "ti_msp_dl_config.h"
 #include "stdio.h"
 #include "string.h"
@@ -28,6 +29,8 @@ int fputc(int ch, FILE *f)
         DL_UART_transmitData(UART_1_INST, (uint8_t)_ptr[i]);//发送数据
     return len;
  }
+
+
 
 int main(void)
 {
@@ -94,12 +97,16 @@ void ADC12_0_INST_IRQHandler(void)
  }
  void UART_1_INST_IRQHandler(void)
 {
+    //如果产生了串口中断
     switch( DL_UART_getPendingInterrupt(UART_1_INST) )
     {
-        case DL_UART_IIDX_RX:
+        case DL_UART_IIDX_RX://如果是接收中断
+            //将发送过来的数据保存在变量中
             mode = DL_UART_Main_receiveData(UART_1_INST);
             break;
-        default:
+
+        default://其他的串口中断
             break;
     }
+    
 }
