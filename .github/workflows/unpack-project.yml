@@ -1,0 +1,24 @@
+name: Unpack project
+on:
+  push:
+    paths:
+      - project.zip
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack project
+        run: |
+          unzip -o project.zip
+          rm project.zip
+          rm -rf .github
+      - name: Commit expanded sources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: expand cleaned CCS project" || exit 0
+          git push
