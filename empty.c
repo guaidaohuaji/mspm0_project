@@ -49,12 +49,18 @@
 #define MAX_VALUE 1024
 #define delay_cycles(cycles) DL_Common_delayCycles(cycles)
 void generateSineWave(uint16_t data[ARRAY_SIZE]) {
-    const double amplitude = 32767.5;
-    const double offset = 32767.5;
+    const double amplitude = 32767.5;  // ???? (65535/2)
+    const double offset = 32767.5;     // ֱ��ƫ�� (65535/2)
+    
     for (int i = 0; i < ARRAY_SIZE; i++) {
+        // ���㵱ǰ��λ??0 ?? 4��??
         double phase = (double)(i % POINTS_PER_CYCLE) / POINTS_PER_CYCLE * 2 * PI;
+        
+        // ��������ֵ��ӳ�䵽[0, 65535]��Χ
         double sin_value = sin(phase);
         double value = sin_value * amplitude + offset;
+        
+        // �������벢ת??Ϊuint16_t
         data[i] = (uint16_t)(value + 0.5);
     }
 }
@@ -63,16 +69,26 @@ int main(void)
 {
     SYSCFG_DL_init();
     uint16_t sine_wave[NUM_POINTS];
+    
+    // 生成正弦波数据
     for (int i = 0; i < NUM_POINTS; i++) {
+        // 计算相位 (0 到 4π)
         double phase = 2.0 * PI * NUM_CYCLES * i / NUM_POINTS;
+        
+        // 计算正弦值并缩放到0-4096范围
         double value = AMPLITUDE * sin(phase) + OFFSET;
         sine_wave[i]=(uint16_t)value;
+        
     }
-    LCD_Init();
+    LCD_Init();//LCD��???��
     uint16_t waveform[1024];
     for(int i=0;i<NUM_POINTS-1;i++){
         LCD_DrawLine(i, sine_wave[i]/4, i+1, sine_wave[i+1]/4, RED);
     }
+    // LCD_ShowString(10,48,"LCD_W:",RED,WHITE,16,0);
+    // LCD_ShowString(100,48,"LCD_H:",RED,WHITE,16,0);
+    // LCD_ShowString(18,78,"Increaseing",RED,WHITE,16,0);
+    // LCD_DrawWaveform(waveform, 1024, 0, 0, 100, 100);
     while (1) {
     }
 }
